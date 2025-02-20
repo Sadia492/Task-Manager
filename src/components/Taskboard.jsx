@@ -53,7 +53,9 @@ export default function TaskBoard({ tasks, setTasks }) {
       setTasks(updatedTasks);
 
       try {
-        await axiosPublic.put(`/tasks/${active.id}`, { category: newCategory });
+        await axiosPublic.patch(`/tasks/${active.id}`, {
+          category: newCategory,
+        });
         toast.success("Task moved successfully");
       } catch (error) {
         toast.error("Failed to move task");
@@ -77,6 +79,7 @@ export default function TaskBoard({ tasks, setTasks }) {
             strategy={rectSwappingStrategy}
           >
             <TaskColumn
+              setTasks={setTasks}
               category={category}
               tasks={tasks.filter((task) => task.category === category)}
             />

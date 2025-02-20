@@ -41,7 +41,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="flex flex-col items-center w-full mt-20">
+    <div className="flex flex-col items-center mt-20 w-11/12 mx-auto">
       {/* Task Form */}
       <form
         onSubmit={handleSubmit}
