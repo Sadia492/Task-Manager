@@ -6,9 +6,8 @@ A responsive task management application where users can **add, edit, delete, an
 
 ## **Live Links**
 
-- **Live Demo:** [Your App Link Here]
-- **Frontend Repository:** [GitHub Frontend Repo Link]
-- **Backend Repository:** [GitHub Backend Repo Link]
+- [Task Manager Live Site](https://task-management-app-fcaff.web.app/)
+- [Task Manager Alternative Live Site](https://blood-hope1.netlify.app/)
 
 ## **Dependencies**
 

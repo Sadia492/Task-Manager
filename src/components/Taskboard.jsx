@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import {
   DndContext,
   PointerSensor,
@@ -15,31 +15,14 @@ import {
 import TaskColumn from "./TaskColumn";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import toast from "react-hot-toast";
-import { useWebSocket } from "../AuthProvider/WebSocketProvider";
 
 export default function TaskBoard({ tasks, setTasks }) {
   const axiosPublic = useAxiosPublic();
-  const { socket } = useWebSocket(); // Access WebSocket
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 3 } }),
     useSensor(TouchSensor)
   );
-
-  // 🟢 Listen for real-time task updates from WebSocket
-  useEffect(() => {
-    if (!socket) return;
-
-    const handleTaskUpdate = (updatedTasks) => {
-      setTasks(updatedTasks);
-    };
-
-    socket.on("tasksUpdated", handleTaskUpdate);
-
-    return () => {
-      socket.off("tasksUpdated", handleTaskUpdate);
-    };
-  }, [socket, setTasks]);
 
   const getPosition = (id) => tasks.findIndex((task) => task._id === id);
 
@@ -69,9 +52,6 @@ export default function TaskBoard({ tasks, setTasks }) {
         await axiosPublic.patch(`/tasks/${active.id}`, {
           category: newCategory,
         });
-
-        // 🟢 Emit task update via WebSocket
-        socket.emit("updateTasks", updatedTasks);
 
         toast.success("Task moved successfully");
       } catch (error) {

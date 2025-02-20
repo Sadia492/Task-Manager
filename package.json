@@ -15,6 +15,7 @@
     "@tanstack/react-query": "^5.66.7",
     "axios": "^1.7.9",
     "firebase": "^11.3.1",
+    "lightningcss": "^1.21.0",
     "react": "^19.0.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
