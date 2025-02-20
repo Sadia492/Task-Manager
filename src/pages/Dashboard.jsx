@@ -55,7 +55,7 @@ export default function Dashboard() {
       {/* Task Form */}
       <form
         onSubmit={handleSubmit}
-        className=" p-6 rounded-lg shadow-md w-full max-w-3xl"
+        className="border p-6 rounded-lg shadow-md w-full max-w-3xl"
       >
         <h2 className="text-2xl font-semibold mb-6 text-center">
           Add a New Task
@@ -80,7 +80,7 @@ export default function Dashboard() {
           />
           <button
             type="submit"
-            className="px-4 py-2 bg-blue-500 text-white rounded-md"
+            className="btn bg-gradient-to-r from-primary to-secondary text-white"
           >
             Add Task
           </button>

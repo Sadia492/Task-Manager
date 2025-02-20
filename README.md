@@ -7,7 +7,7 @@ A responsive task management application where users can **add, edit, delete, an
 ## **Live Links**
 
 - [Task Manager Live Site](https://task-management-app-fcaff.web.app/)
-- [Task Manager Alternative Live Site](https://blood-hope1.netlify.app/)
+- [Task Manager Alternative Live Site](https://task-manager112.netlify.app/)
 
 ## **Dependencies**
 
@@ -41,7 +41,7 @@ A responsive task management application where users can **add, edit, delete, an
 ### **1. Clone the Repository**
 
 ```bash
-git clone [your-repo-link]
+git clone https://github.com/Sadia492/Task-Manager
 cd task-management-app
 ```
 
@@ -80,5 +80,5 @@ VITE_FIREBASE_AUTH_DOMAIN=your_auth_domain
 ## **Technologies Used**
 
 - **Frontend:** React, Vite.js,Tailwind Css, Firebase Authentication
-- **Backend:** Express.js, MongoDB, WebSockets
-- **Libraries:** , Axios,
+- **Backend:** Express.js, MongoDB
+- **Libraries:** Axios, DaisyUi, DND-Kit
