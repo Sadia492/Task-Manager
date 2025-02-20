@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "../assets/icons8-task-64.png";
+import { authContext } from "../AuthProvider/AuthProvider";
 // import logo from "../assets/book.png";
 // import useAuth from "../hooks/useAuth";
 // import toast from "react-hot-toast";
 // import "react-tooltip/dist/react-tooltip.css";
 // import { Tooltip } from "react-tooltip";
 export default function Navbar() {
-  // const { user, signOutUser } = useContext(authContext);
-  const user = "snigdha";
+  const { user, signOutUser } = useContext(authContext);
+  // const user = "snigdha";
   const { pathname } = useLocation();
   const [isScrolled, setIsScrolled] = useState(false);
 
@@ -41,22 +42,22 @@ export default function Navbar() {
 
   const [isHovered, setIsHovered] = useState(false);
 
-  // const handleSignOut = () => {
-  //   signOutUser().then(() => {});
-  // };
-  // // Theme toggle state and effect using new key in localStorage
-  // const [theme, setTheme] = useState(
-  //   () => localStorage.getItem("storeDarkLight") || "light"
-  // );
+  const handleSignOut = () => {
+    signOutUser().then(() => {});
+  };
+  // Theme toggle state and effect using new key in localStorage
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("storeDarkLight") || "light"
+  );
 
-  // useEffect(() => {
-  //   document.documentElement.setAttribute("data-theme", theme);
-  //   localStorage.setItem("storeDarkLight", theme); // Changed the key here
-  // }, [theme]);
+  useEffect(() => {
+    document.documentElement.setAttribute("data-theme", theme);
+    localStorage.setItem("storeDarkLight", theme); // Changed the key here
+  }, [theme]);
 
-  // const toggleTheme = () => {
-  //   setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
-  // };
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+  };
 
   return (
     <div
@@ -112,12 +113,12 @@ export default function Navbar() {
                 onMouseEnter={() => setIsHovered(true)}
               >
                 <img
-                  //   src={user.photoURL}
+                  src={user.photoURL}
                   alt="User Profile"
                   className="w-12 h-12 rounded-full object-cover cursor-pointer"
                 />
                 <Link
-                  // onClick={handleSignOut}
+                  onClick={handleSignOut}
                   to="/login"
                   className="btn bg-gradient-to-r from-primary to-secondary text-white"
                 >
@@ -133,19 +134,13 @@ export default function Navbar() {
               >
                 Login
               </Link>
-              <Link
-                to="/register"
-                className="btn bg-gradient-to-r from-primary to-secondary text-white"
-              >
-                Register
-              </Link>
             </div>
           )}
           <label className="swap swap-rotate ml-2">
             {/* this hidden checkbox controls the state */}
             <input
-              //   onChange={toggleTheme}
-              //   checked={theme === "dark"}
+              onChange={toggleTheme}
+              checked={theme === "dark"}
               type="checkbox"
               className="theme-controller "
               value="synthwave"

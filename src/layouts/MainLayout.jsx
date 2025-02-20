@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import { Toaster } from "react-hot-toast";
 
 export default function MainLayout() {
   return (
@@ -10,6 +11,7 @@ export default function MainLayout() {
       <div className="min-h-screen">
         <Outlet />
       </div>
+      <Toaster />
     </div>
   );
 }
