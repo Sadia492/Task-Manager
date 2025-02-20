@@ -10,7 +10,7 @@ import googleLogo from "../assets/icons8-google-48.png";
 export default function Login() {
   const { signInWithGoogle, user, setUser, setLoading } =
     useContext(authContext);
-  console.log(user);
+
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   const handleSignInWithGoogle = () => {
@@ -23,7 +23,7 @@ export default function Login() {
           email: result.user.email,
         };
         const { data } = await axiosPublic.post("/users", userData);
-        console.log(data);
+
         if (data.insertedId) {
           toast.success("Registration successful");
         } else {

@@ -56,7 +56,6 @@ export default function TaskBoard({ tasks, setTasks }) {
         toast.success("Task moved successfully");
       } catch (error) {
         toast.error("Failed to move task");
-        console.log(error);
       }
     }
   };
