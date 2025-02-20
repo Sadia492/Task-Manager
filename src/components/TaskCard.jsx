@@ -86,21 +86,42 @@ export default function TaskCard({ task, setTasks }) {
       {...listeners}
       {...attributes}
       style={style}
-      className="bg-white p-4 mb-4 rounded-lg shadow-md cursor-grab"
+      className="bg-white text-black p-4 mb-4 rounded-lg shadow-md cursor-grab"
     >
       <div className="flex justify-between" style={{ touchAction: "none" }}>
         <div>
-          <h4 className="font-semibold">{task.title}</h4>
-          <p className="text-sm text-gray-600">{task.description}</p>
+          <h4 className="font-semibold">{task?.title}</h4>
+          <p className="text-sm text-gray-600">{task?.description}</p>
           <p className="text-xs text-gray-500">
-            Created: {new Date(task.timestamp).toLocaleString()}
+            Created: {new Date(task?.timestamp).toLocaleString()}
+          </p>
+          <p
+            className={`text-sm  ${
+              task?.category === "In Progress"
+                ? "text-amber-400"
+                : task?.category === "Done"
+                ? "text-green-500"
+                : task?.category === "To-Do"
+                ? "text-blue-500"
+                : "text-gray-600"
+            }
+         
+            `}
+          >
+            {task?.category}
           </p>
         </div>
         <div className="flex flex-col gap-2">
-          <button onClick={openModal} className="btn">
+          <button
+            onClick={openModal}
+            className="btn bg-gradient-to-r from-primary to-secondary text-white"
+          >
             <FaPen />
           </button>
-          <button onClick={() => handleDelete(task?._id)} className="btn">
+          <button
+            onClick={() => handleDelete(task?._id)}
+            className="btn bg-gradient-to-r from-primary to-secondary text-white"
+          >
             <FaTrashAlt />
           </button>
         </div>

@@ -34,9 +34,11 @@ export default function Navbar() {
       <NavLink to="/">
         <li>Home</li>
       </NavLink>
-      <NavLink to="/dashboard">
-        <li>Dashboard</li>
-      </NavLink>
+      {user && (
+        <NavLink to="/dashboard">
+          <li>Dashboard</li>
+        </NavLink>
+      )}
     </>
   );
 
@@ -64,9 +66,9 @@ export default function Navbar() {
       className={`w-full fixed top-0 z-10 transition-all duration-500 ease-in-out ${
         pathname === "/"
           ? isScrolled
-            ? "bg-secondary/50 backdrop-blur-md" // Background color when scrolled on homepage
+            ? "bg-primary/35 backdrop-blur-md" // Background color when scrolled on homepage
             : "bg-transparent" // Transparent background on homepage
-          : "bg-secondary/45 backdrop-blur-xl" // Non-transparent background on other pages
+          : "bg-primary/35 backdrop-blur-xl" // Non-transparent background on other pages
       }`}
     >
       <div className="navbar lg:w-11/12 mx-auto">
@@ -148,7 +150,7 @@ export default function Navbar() {
 
             {/* sun icon */}
             <svg
-              className="swap-off h-10 w-7 text-white fill-current"
+              className="swap-off h-10 w-7 text-black fill-current"
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 24 24"
               // className="text-white"

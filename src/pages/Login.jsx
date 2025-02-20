@@ -4,6 +4,8 @@ import { FaGoogle } from "react-icons/fa";
 import { authContext } from "../AuthProvider/AuthProvider";
 import { Navigate, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../hooks/useAxiosPublic";
+import loginImg from "../assets/Mobile login-cuate.png";
+import googleLogo from "../assets/icons8-google-48.png";
 
 export default function Login() {
   const { signInWithGoogle, user, setUser, setLoading } =
@@ -33,10 +35,20 @@ export default function Login() {
       });
   };
   return (
-    <div className="min-h-screen flex justify-center items-center">
-      <div className="text-center btn bg-gradient-to-r from-primary to-secondary text-white">
-        <button onClick={handleSignInWithGoogle} className="flex gap-3">
-          <FaGoogle></FaGoogle> Sign In With Google
+    <div className="min-h-screen w-11/12 mx-auto grid grid-cols-2 justify-center items-center gap-8">
+      <div className="h-full">
+        <img className="h-screen" src={loginImg} alt="" />
+      </div>
+      <div className="flex flex-col items-center">
+        <h2 className="text-3xl font-bold mb-4 text-center">Sign In Now</h2>
+        <button
+          onClick={handleSignInWithGoogle}
+          className="flex items-center justify-center gap-3 w-full max-w-xs px-4 py-2 border border-gray-300 bg-white shadow-xl rounded-lg transition-all hover:bg-gray-100 active:bg-gray-200 focus:ring-2 focus:ring-gray-300"
+        >
+          <img src={googleLogo} alt="" />
+          <span className="font-bold text-xl text-black">
+            Sign In with Google
+          </span>
         </button>
       </div>
     </div>

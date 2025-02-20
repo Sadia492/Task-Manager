@@ -1,63 +1,34 @@
-import React from "react";
+import React, { useContext } from "react";
+import bannerImg from "../assets/time-management-marketers-teamwork-media-planning-media-representation-control-reach-your-client-best-media-plan.png";
+import { Link } from "react-router-dom";
+import { authContext } from "../AuthProvider/AuthProvider";
 
 export default function Home() {
+  const { user } = useContext(authContext);
   return (
-    <div className="carousel w-full">
-      <div id="slide1" className="carousel-item relative w-full">
-        <img
-          src="https://img.daisyui.com/images/stock/photo-1625726411847-8cbb60cc71e6.webp"
-          className="w-full"
-        />
-        <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-          <a href="#slide4" className="btn btn-circle">
-            ❮
-          </a>
-          <a href="#slide2" className="btn btn-circle">
-            ❯
-          </a>
-        </div>
+    <div className="w-full grid grid-cols-2 min-h-screen justify-center items-center ">
+      <div className="ml-20 space-y-6">
+        <h2 className="font-bold text-5xl">
+          Streamline Your Tasks,
+          <br /> Elevate Your Productivity!
+        </h2>
+        <p className="text-gray-500">
+          Our task management app empowers you to organize, prioritize, and
+          complete your tasks with ease. With intuitive drag-and-drop
+          functionality, real-time updates, and seamless collaboration, staying
+          on top of your workflow has never been easier. Whether you're managing
+          personal projects or team tasks, our app keeps you focused and
+          efficient—every step of the way!
+        </p>
+        <Link
+          to={user ? "/dashboard" : "/login"}
+          className="btn bg-gradient-to-r from-primary to-secondary text-white"
+        >
+          Get Started Now
+        </Link>
       </div>
-      <div id="slide2" className="carousel-item relative w-full">
-        <img
-          src="https://img.daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.webp"
-          className="w-full"
-        />
-        <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-          <a href="#slide1" className="btn btn-circle">
-            ❮
-          </a>
-          <a href="#slide3" className="btn btn-circle">
-            ❯
-          </a>
-        </div>
-      </div>
-      <div id="slide3" className="carousel-item relative w-full">
-        <img
-          src="https://img.daisyui.com/images/stock/photo-1414694762283-acccc27bca85.webp"
-          className="w-full"
-        />
-        <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-          <a href="#slide2" className="btn btn-circle">
-            ❮
-          </a>
-          <a href="#slide4" className="btn btn-circle">
-            ❯
-          </a>
-        </div>
-      </div>
-      <div id="slide4" className="carousel-item relative w-full">
-        <img
-          src="https://img.daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.webp"
-          className="w-full"
-        />
-        <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
-          <a href="#slide3" className="btn btn-circle">
-            ❮
-          </a>
-          <a href="#slide1" className="btn btn-circle">
-            ❯
-          </a>
-        </div>
+      <div>
+        <img src={bannerImg} alt="" />
       </div>
     </div>
   );
