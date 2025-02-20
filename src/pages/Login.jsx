@@ -7,18 +7,22 @@ import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export default function Login() {
   const { signInWithGoogle, user, setUser } = useContext(authContext);
+  console.log(user);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   const handleSignInWithGoogle = () => {
     signInWithGoogle().then(async (result) => {
+      navigate("/dashboard");
       const userData = {
         UserId: result.user.uid,
         name: result.user.displayName,
         email: result.user.email,
       };
       const { data } = await axiosPublic.post("/users", userData);
+      console.log(data);
       if (data.insertedId) {
-        navigate("/dashboard");
+        toast.success("Registration successful");
+      } else {
         toast.success("Login successful");
       }
     });
