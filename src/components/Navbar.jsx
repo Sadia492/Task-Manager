@@ -34,7 +34,7 @@ export default function Navbar() {
       <NavLink to="/">
         <li>Home</li>
       </NavLink>
-      <NavLink to="/campaigns">
+      <NavLink to="/dashboard">
         <li>Dashboard</li>
       </NavLink>
     </>

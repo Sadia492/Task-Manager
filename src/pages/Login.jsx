@@ -3,15 +3,24 @@ import toast from "react-hot-toast";
 import { FaGoogle } from "react-icons/fa";
 import { authContext } from "../AuthProvider/AuthProvider";
 import { Navigate, useNavigate } from "react-router-dom";
+import useAxiosPublic from "../hooks/useAxiosPublic";
 
 export default function Login() {
-  const { signInWithGoogle } = useContext(authContext);
+  const { signInWithGoogle, user, setUser } = useContext(authContext);
   const navigate = useNavigate();
-
+  const axiosPublic = useAxiosPublic();
   const handleSignInWithGoogle = () => {
-    signInWithGoogle().then(() => {
-      navigate("/");
-      toast.success("Login successful");
+    signInWithGoogle().then(async (result) => {
+      const userData = {
+        UserId: result.user.uid,
+        name: result.user.displayName,
+        email: result.user.email,
+      };
+      const { data } = await axiosPublic.post("/users", userData);
+      if (data.insertedId) {
+        navigate("/dashboard");
+        toast.success("Login successful");
+      }
     });
   };
   return (
