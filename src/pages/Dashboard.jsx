@@ -52,21 +52,21 @@ export default function Dashboard() {
         </h2>
 
         {/* Form in Horizontal Layout */}
-        <div className="flex gap-4 mb-6">
+        <div className="flex md:flex-row justify-center items-center flex-col flex-wrap gap-4 mb-6">
           <input
             type="text"
             name="title"
             placeholder="Task Title"
             required
             maxLength={50}
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-md"
+            className="flex-1 px-3 py-2 border w-full border-gray-300 rounded-md"
           />
           <input
             type="text"
             name="description"
             placeholder="Task Description (optional)"
             maxLength={200}
-            className="flex-1 px-3 py-2 border border-gray-300 rounded-md"
+            className="flex-1 px-3 py-2 border w-full border-gray-300 rounded-md"
           />
           <button
             type="submit"

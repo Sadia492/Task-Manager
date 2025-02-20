@@ -23,6 +23,7 @@ export default function AuthProvider({ children }) {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       setUser(currentUser);
+      setLoading(false);
       console.log(currentUser);
       // if (currentUser?.email) {
       //   const { data } = await axios.post(

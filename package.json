@@ -24,6 +24,7 @@
     "react-modal": "^3.16.3",
     "react-movable": "^3.4.0",
     "react-router-dom": "^6.29.0",
+    "react-spinners": "^0.15.0",
     "sweetalert2": "^11.6.13"
   },
   "devDependencies": {

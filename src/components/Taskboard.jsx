@@ -69,7 +69,7 @@ export default function TaskBoard({ tasks, setTasks }) {
       collisionDetection={closestCorners}
       onDragEnd={handleDragEnd}
     >
-      <div className="grid grid-cols-3 gap-6 w-full mt-10">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full mt-10">
         {["To-Do", "In Progress", "Done"].map((category) => (
           <SortableContext
             key={category}
