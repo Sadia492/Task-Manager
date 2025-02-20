@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPublic = axios.create({
-  baseURL: "http://localhost:9000",
+  baseURL: "https://task-management-server-lime-delta.vercel.app",
 });
 
 const useAxiosPublic = () => {

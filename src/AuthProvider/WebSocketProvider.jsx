@@ -7,9 +7,12 @@ export const WebSocketProvider = ({ children }) => {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io("http://localhost:9000", {
-      transports: ["websocket"],
-    });
+    const newSocket = io(
+      "https://task-management-server-lime-delta.vercel.app",
+      {
+        transports: ["websocket"],
+      }
+    );
 
     setSocket(newSocket);
 

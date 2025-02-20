@@ -2,11 +2,9 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router-dom";
 import logo from "../assets/icons8-task-64.png";
 import { authContext } from "../AuthProvider/AuthProvider";
-// import logo from "../assets/book.png";
-// import useAuth from "../hooks/useAuth";
-// import toast from "react-hot-toast";
-// import "react-tooltip/dist/react-tooltip.css";
-// import { Tooltip } from "react-tooltip";
+import toast from "react-hot-toast";
+import "react-tooltip/dist/react-tooltip.css";
+import { Tooltip } from "react-tooltip";
 export default function Navbar() {
   const { user, signOutUser } = useContext(authContext);
   // const user = "snigdha";
@@ -97,17 +95,17 @@ export default function Navbar() {
               {links}
             </ul>
           </div>
-          <a className="text-3xl flex items-center justify-center font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text">
+          <a className="text-2xl flex items-center justify-center font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text">
             <img className="w-14 h-14" src={logo} alt="" />
             Task Manager
           </a>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal gap-6 px-1 font-semibold ">
-            {links}
-          </ul>
-        </div>
         <div className="navbar-end">
+          <div className=" hidden lg:flex mr-3">
+            <ul className="menu menu-horizontal gap-6 px-1 font-semibold ">
+              {links}
+            </ul>
+          </div>
           {user ? (
             <div className="relative flex">
               <div
@@ -116,9 +114,12 @@ export default function Navbar() {
               >
                 <img
                   src={user.photoURL}
+                  data-tooltip-id="my-tooltip"
+                  data-tooltip-content={user?.displayName}
                   alt="User Profile"
-                  className="w-12 h-12 rounded-full object-cover cursor-pointer"
+                  className="w-12 h-12 mr-2 rounded-full object-cover cursor-pointer"
                 />
+                <Tooltip id="my-tooltip" />
                 <Link
                   onClick={handleSignOut}
                   to="/login"
