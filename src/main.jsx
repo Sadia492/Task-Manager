@@ -11,13 +11,16 @@ import {
   QueryClientProvider,
   useQuery,
 } from "@tanstack/react-query";
+import { WebSocketProvider } from "./AuthProvider/WebSocketProvider.jsx";
 const queryClient = new QueryClient();
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
-        <RouterProvider router={router} />
+        <WebSocketProvider>
+          <RouterProvider router={router} />
+        </WebSocketProvider>
       </AuthProvider>
     </QueryClientProvider>
   </StrictMode>

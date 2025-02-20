@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { FaPen, FaTrashAlt } from "react-icons/fa";
@@ -6,10 +6,13 @@ import Swal from "sweetalert2";
 import useAxiosPublic from "../hooks/useAxiosPublic";
 import Modal from "react-modal";
 import { authContext } from "../AuthProvider/AuthProvider";
+import { useWebSocket } from "../AuthProvider/WebSocketProvider"; // ✅ Import WebSocket
+
 Modal.setAppElement("#root");
 
 export default function TaskCard({ task, setTasks }) {
   const { user } = useContext(authContext);
+  const { socket } = useWebSocket(); // ✅ Get socket from WebSocketProvider
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [title, setTitle] = useState(task?.title);
   const [description, setDescription] = useState(task?.description);
@@ -27,7 +30,7 @@ export default function TaskCard({ task, setTasks }) {
     cursor: active ? "grabbing" : "grab",
   };
 
-  // 🔥 Delete Task & Refresh UI
+  // 🔥 Delete Task & Broadcast via WebSocket
   const handleDelete = async (id) => {
     const result = await Swal.fire({
       title: "Are you sure?",
@@ -45,8 +48,14 @@ export default function TaskCard({ task, setTasks }) {
 
         if (data.deletedCount) {
           Swal.fire("Deleted!", "Your Task has been deleted.", "success");
+
           // 🔥 Remove from UI
           setTasks((prevTasks) => prevTasks.filter((t) => t._id !== id));
+
+          // ✅ Emit delete event via WebSocket
+          if (socket) {
+            socket.emit("deleteTask", id);
+          }
         }
       } catch (error) {
         Swal.fire("Error!", "Failed to delete the task.", "error");
@@ -54,7 +63,7 @@ export default function TaskCard({ task, setTasks }) {
     }
   };
 
-  // 🔥 Update Task & Refresh UI
+  // 🔥 Update Task & Broadcast via WebSocket
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -73,12 +82,42 @@ export default function TaskCard({ task, setTasks }) {
           )
         );
 
+        // ✅ Emit update event via WebSocket
+        if (socket) {
+          socket.emit("updateTask", { _id: task._id, title, description });
+        }
+
         closeModal();
       }
     } catch (error) {
       Swal.fire("Error!", "Failed to update task.", "error");
     }
   };
+
+  // 🔥 Listen for real-time updates
+  useEffect(() => {
+    if (!socket) return;
+
+    const handleTaskDeleted = (taskId) => {
+      setTasks((prevTasks) => prevTasks.filter((t) => t._id !== taskId));
+    };
+
+    const handleTaskUpdated = (updatedTask) => {
+      setTasks((prevTasks) =>
+        prevTasks.map((t) =>
+          t._id === updatedTask._id ? { ...t, ...updatedTask } : t
+        )
+      );
+    };
+
+    socket.on("taskDeleted", handleTaskDeleted);
+    socket.on("taskUpdated", handleTaskUpdated);
+
+    return () => {
+      socket.off("taskDeleted", handleTaskDeleted);
+      socket.off("taskUpdated", handleTaskUpdated);
+    };
+  }, [socket, setTasks]);
 
   return (
     <div
