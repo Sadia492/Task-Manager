@@ -35,8 +35,8 @@ export default function Login() {
       });
   };
   return (
-    <div className="min-h-screen w-11/12 mx-auto grid grid-cols-2 justify-center items-center gap-8">
-      <div className="h-full">
+    <div className="min-h-screen w-11/12 mx-auto grid grid-cols-1 lg:grid-cols-2 justify-center items-center gap-8">
+      <div className="h-full flex justify-center items-center">
         <img className="h-screen" src={loginImg} alt="" />
       </div>
       <div className="flex flex-col items-center">
