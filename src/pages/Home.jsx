@@ -6,7 +6,7 @@ import { authContext } from "../AuthProvider/AuthProvider";
 export default function Home() {
   const { user } = useContext(authContext);
   return (
-    <div className="w-full grid grid-cols-1 mt-22 lg:grid-cols-2 min-h-screen justify-center items-center ">
+    <div className="w-full grid grid-cols-1 lg:grid-cols-2 min-h-screen justify-center items-center ">
       <div className="lg:ml-20 ml-10 space-y-6">
         <h2 className="font-bold text-5xl">
           Streamline Your Tasks,
